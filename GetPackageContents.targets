@@ -13,13 +13,13 @@
 <Project>
 	<Target Name="_PreparePackageContents" BeforeTargets="GetPackageContents">
 		<ItemGroup>
-			<_PackageFile Include="$(OutputPath)$(TargetFramework)/*.dll" TargetFramework="$(TargetFramework)/" />
-			<_PackageFile Include="$(OutputPath)$(TargetFramework)/*.xml" TargetFramework="$(TargetFramework)/" />
-			<_PackageFile Include="$(OutputPath)$(TargetFramework)/*.pdb" TargetFramework="$(TargetFramework)/" />
+			<_PackageFile Include="$(OutputPath)**/*.dll" TargetFramework="%(RecursiveDir)/" />
+			<_PackageFile Include="$(OutputPath)**/*.xml" TargetFramework="%(RecursiveDir)/" />
+			<_PackageFile Include="$(OutputPath)**/*.pdb" TargetFramework="%(RecursiveDir)/" />
 			<_PackageFile Include="$(OutputPath)*.dll" />
 			<_PackageFile Include="$(OutputPath)*.xml" />
 			<_PackageFile Include="$(OutputPath)*.pdb" />
-			<PackageFile Include="%(_PackageFile.Identity)" PackagePath="lib/%(_PackageFile.TargetFramework)%(_PackageFile.Filename)%(_PackageFile.Extension)" Condition="Exists(%(_PackageFile.Identity))" />
+			<PackageFile Include="%(_PackageFile.Identity)" PackagePath="lib/%(_PackageFile.RecursiveDir)%(_PackageFile.Filename)%(_PackageFile.Extension)" Condition="Exists(%(_PackageFile.Identity))" />
 		</ItemGroup>
 	</Target>
 	<PropertyGroup>
